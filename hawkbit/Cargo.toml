@@ -1,13 +1,13 @@
 [package]
 name = "hawkbit"
-version = "0.7.1"
+version = "0.7.2"
 authors = ["Thomas Witte <thomas.witte@liebherr.com>", "Guillaume Desmottes <guillaume.desmottes@collabora.com>"]
 edition = "2018"
 categories = ["api-bindings"]
 description = "Client side API to interact with Eclipse hawkBit"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/LHThomasWitte/hawkbit-rs"
+repository = "https://github.com/liebherr-group/hawkbit-rs"
 documentation = "https://docs.rs/hawkbit_mock/"
 
 [dependencies]
