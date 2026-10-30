@@ -606,16 +606,27 @@ async fn wrong_checksums() {
         downloaded.check_md5().await,
         Err(Error::ChecksumError(ChecksumType::Md5))
     );
+
+    #[cfg(feature = "hash-md5")]
+    assert_eq!(downloaded.md5().await, "badger".to_string());
+
     #[cfg(feature = "hash-sha1")]
     assert_matches!(
         downloaded.check_sha1().await,
         Err(Error::ChecksumError(ChecksumType::Sha1))
     );
+
+    #[cfg(feature = "hash-sha1")]
+    assert_eq!(downloaded.sha1().await, "badger".to_string());
+
     #[cfg(feature = "hash-sha256")]
     assert_matches!(
         downloaded.check_sha256().await,
         Err(Error::ChecksumError(ChecksumType::Sha256))
     );
+
+    #[cfg(feature = "hash-sha256")]
+    assert_eq!(downloaded.sha256().await, "badger".to_string());
 
     cfg_if::cfg_if! {
         if #[cfg(feature = "hash-md5")] {

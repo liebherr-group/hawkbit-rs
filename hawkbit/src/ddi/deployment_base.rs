@@ -778,6 +778,12 @@ impl DownloadedArtifact {
         self.hash(hasher).await
     }
 
+    /// Returns the expected md5sum of the downloaded file.
+    #[cfg(feature = "hash-md5")]
+    pub async fn md5(&self) -> String {
+        self.hashes.md5.clone()
+    }
+
     /// Check if the sha1sum of the downloaded file matches the one provided by the server.
     #[cfg(feature = "hash-sha1")]
     pub async fn check_sha1(&self) -> Result<(), Error> {
@@ -785,10 +791,22 @@ impl DownloadedArtifact {
         self.hash(hasher).await
     }
 
+    /// Returns the expected sha1sum of the downloaded file.
+    #[cfg(feature = "hash-sha1")]
+    pub async fn sha1(&self) -> String {
+        self.hashes.sha1.clone()
+    }
+
     /// Check if the sha256sum of the downloaded file matches the one provided by the server.
     #[cfg(feature = "hash-sha256")]
     pub async fn check_sha256(&self) -> Result<(), Error> {
         let hasher = DownloadHasher::new_sha256(self.hashes.sha256.clone());
         self.hash(hasher).await
+    }
+
+    /// Returns the expected sha256sum of the downloaded file.
+    #[cfg(feature = "hash-sha256")]
+    pub async fn sha256(&self) -> String {
+        self.hashes.sha256.clone()
     }
 }
