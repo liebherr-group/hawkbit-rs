@@ -1,6 +1,6 @@
 [package]
 name = "hawkbit_mock"
-version = "0.7.2"
+version = "0.7.3"
 authors = ["Thomas Witte <thomas.witte@liebherr.com>", "Guillaume Desmottes <guillaume.desmottes@collabora.com>"]
 edition = "2018"
 categories = ["development-tools::testing"]
