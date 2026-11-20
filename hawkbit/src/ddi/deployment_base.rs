@@ -415,6 +415,24 @@ impl<'a> Artifact<'a> {
         self.artifact.size
     }
 
+    /// Returns the expected md5sum of the downloaded file.
+    #[cfg(feature = "hash-md5")]
+    pub fn md5(&self) -> String {
+        self.artifact.hashes.md5.clone()
+    }
+
+    /// Returns the expected sha1sum of the downloaded file.
+    #[cfg(feature = "hash-sha1")]
+    pub fn sha1(&self) -> String {
+        self.artifact.hashes.sha1.clone()
+    }
+
+    /// Returns the expected sha256sum of the downloaded file.
+    #[cfg(feature = "hash-sha256")]
+    pub fn sha256(&self) -> String {
+        self.artifact.hashes.sha256.clone()
+    }
+
     async fn download_response(&'a self) -> Result<Response, Error> {
         let download = self
             .artifact
@@ -780,7 +798,7 @@ impl DownloadedArtifact {
 
     /// Returns the expected md5sum of the downloaded file.
     #[cfg(feature = "hash-md5")]
-    pub async fn md5(&self) -> String {
+    pub fn md5(&self) -> String {
         self.hashes.md5.clone()
     }
 
@@ -793,7 +811,7 @@ impl DownloadedArtifact {
 
     /// Returns the expected sha1sum of the downloaded file.
     #[cfg(feature = "hash-sha1")]
-    pub async fn sha1(&self) -> String {
+    pub fn sha1(&self) -> String {
         self.hashes.sha1.clone()
     }
 
@@ -806,7 +824,7 @@ impl DownloadedArtifact {
 
     /// Returns the expected sha256sum of the downloaded file.
     #[cfg(feature = "hash-sha256")]
-    pub async fn sha256(&self) -> String {
+    pub fn sha256(&self) -> String {
         self.hashes.sha256.clone()
     }
 }

@@ -224,6 +224,19 @@ async fn deployment() {
         assert!(p.exists());
 
         #[cfg(feature = "hash-md5")]
+        assert_eq!(artifacts[0].md5(), "5eb63bbbe01eeed093cb22bb8f5acdc3");
+        #[cfg(feature = "hash-sha1")]
+        assert_eq!(
+            artifacts[0].sha1(),
+            "2aae6c35c94fcfb415dbe95f408b9ce91ee846ed"
+        );
+        #[cfg(feature = "hash-sha256")]
+        assert_eq!(
+            artifacts[0].sha256(),
+            "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+        );
+
+        #[cfg(feature = "hash-md5")]
         artifacts[0].check_md5().await.expect("invalid md5");
         #[cfg(feature = "hash-sha1")]
         artifacts[0].check_sha1().await.expect("invalid sha1");
@@ -608,7 +621,7 @@ async fn wrong_checksums() {
     );
 
     #[cfg(feature = "hash-md5")]
-    assert_eq!(downloaded.md5().await, "badger".to_string());
+    assert_eq!(downloaded.md5(), "badger".to_string());
 
     #[cfg(feature = "hash-sha1")]
     assert_matches!(
@@ -617,7 +630,7 @@ async fn wrong_checksums() {
     );
 
     #[cfg(feature = "hash-sha1")]
-    assert_eq!(downloaded.sha1().await, "badger".to_string());
+    assert_eq!(downloaded.sha1(), "badger".to_string());
 
     #[cfg(feature = "hash-sha256")]
     assert_matches!(
@@ -626,7 +639,7 @@ async fn wrong_checksums() {
     );
 
     #[cfg(feature = "hash-sha256")]
-    assert_eq!(downloaded.sha256().await, "badger".to_string());
+    assert_eq!(downloaded.sha256(), "badger".to_string());
 
     cfg_if::cfg_if! {
         if #[cfg(feature = "hash-md5")] {
